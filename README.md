@@ -8,7 +8,7 @@ Visual Studio Code（下文简称 VSCode）是微软公司开发的一款免费�
 
 本文分享了使用 VSCode 编写 Markdown 文档的经验，介绍了相关工具的安装、设置与一些 Markdown 的写作技巧，希望对读者有所帮助，让我们相互交流，共同打造令人愉悦的科技文章写作体验。
 
-## 1. 安装 WSL（Windows Subsystem Linux）（Windows 10 Only && Optional）
+## 1. 安装 WSL（Windows Subsystem Linux/只适用于 Windows 10 系统）
 
 Windows 10 WSL 提供了轻量级、原生的 Linux 命令行环境体验。安装 WSL 的收益在于：
 
@@ -73,10 +73,11 @@ Markdown All in One 提供了 ToC（Table of Contents）生成，自动编辑，
 
 ### 3.1 VSCode 色彩主题（Color Theme）
 
-可以在 VSCode 中的插件页，通过关键字`Light Theme`/`Dark Theme`搜索 VSCode 浅色/深色的色彩主题。推荐以下色彩主题：
+可以在 VSCode 中的插件页，通过关键字`Light Theme`/`Dark Theme`搜索 VSCode 浅色/深色的色彩主题。推荐以下主题：
 
-- Light Theme: `Blue Light Theme`
-- Dark Theme: `Capo-Dark`
+- Light Theme: `Blue Light Theme`（内置主题）
+- Dark Theme: `Capo-Dark`（内置主题）
+- [Night Owl](https://github.com/sdras/night-owl-vscode-theme)
 
 ### 3.2 VSCode 文件图标主题（Icon Theme）
 
@@ -111,62 +112,9 @@ Markdown All in One 提供了 ToC（Table of Contents）生成，自动编辑，
 
 ![](assets/dank-mono.png)
 
-在`setting.json`中除了设置相应字体字号之外，还需要新增基于 token 的字体效果设置：
-
-```json
-{
-  ...
-  "editor.tokenColorCustomizations": {
-    "textMateRules": [
-      {
-        "scope": [
-          "comment",
-          "keyword",
-          "keyword.control",
-          "keyword.control.from",
-          "keyword.control.flow",
-          "keyword.control.import",
-          "keyword.control.export",
-          "keyword.control.default",
-          "keyword.control.trycatch",
-          "keyword.control.conditional",
-          "keyword.operator.new",
-          "storage",
-          "storage.type",
-          "storage.type.class",
-          "storage.modifier.tsx",
-          "storage.type.function",
-          "storage.modifier.async",
-          "constant", // String, Number, Boolean…, this, super
-          "variable.language.this",
-          "variable.language.super"
-        ],
-        "settings": {
-          "fontStyle": "italic"
-        }
-      },
-      {
-        "scope": [
-          "invalid",
-          "keyword.operator",
-          "constant.numeric.css",
-          "keyword.other.unit.px.css",
-          "constant.numeric.decimal.js",
-          "constant.numeric.json"
-        ],
-        "settings": {
-          "fontStyle": ""
-        }
-      }
-    ]
-  },
-  ...
-}
-```
-
 ## 4. 使用 Markdown 写作
 
-Markdown 的基本元素非常简明直白，参考这篇三分钟的[Mastering Markdown](https://guides.github.com/features/mastering-markdown/)教程即可快速上手 Markdown 写作。本章着重介绍一些 Markdown 写作技巧。
+Markdown 的基本元素非常简明直白，参考这篇三分钟的[Mastering Markdown](https://guides.github.com/features/mastering-markdown/)教程即可快速上手 Markdown 写作。本章介绍一些 Markdown 写作技巧。
 
 ### 4.1 等宽字体与程序语法高亮
 
@@ -188,7 +136,7 @@ const projection = function(ev) {
 };
 
 clicks.map(projection).subscribe({
-  next: console.log
+  next: console.log,
 });
 ```
 
@@ -218,7 +166,7 @@ const projection = function(ev) {
 };
 
 clicks.map(projection).subscribe({
-  next: console.log
+  next: console.log,
 });
 ```
 
@@ -373,3 +321,27 @@ Markdown PDF 插件不支持以下 Markdown 特性的导出：
 ![](assets/typora-latex-setting.png)
 
 设置完成后，通过 Typora 的`File->Export`菜单项导出目标格式的文档。
+
+## 6. Markdown 与 Terminals 的集成
+
+如果 Markdown 文件中有命令行片段：
+
+```sh
+kubectl apply -f res/02-hello-go-insufficient-mem.yaml
+watch kubectl get pods
+```
+
+每次执行命令时都需要复制粘贴需要执行的命令非常不便，通过自定义用户按键映射来提高 Markdown 文档与命令行终端的无缝集成体验。
+
+打开键盘快捷键配置：
+
+![](assets/keyboard-shortcut.png)
+
+自定义如下快捷键：
+
+![](assets/user-key-binding.png)
+
+以上配置达到的效果是：
+
+- 通过`` Ctrl+` ``完成 Markdown 编辑区和命令行终端的切换
+- 通过`Ctrl+Enter`执行当前行或当选选中的命令
