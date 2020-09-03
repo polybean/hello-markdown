@@ -130,7 +130,7 @@ Markdown 的基本元素非常简明直白，参考这篇三分钟的[Mastering 
 const button = document.getElementById("button");
 const clicks = Observable.fromEvent(button, "click");
 
-const projection = function(ev) {
+const projection = function (ev) {
   console.log(ev);
   return ev.clientX;
 };
@@ -160,7 +160,7 @@ clicks.map(projection).subscribe({
 const button = document.getElementById("button");
 const clicks = Observable.fromEvent(button, "click");
 
-const projection = function(ev) {
+const projection = function (ev) {
   console.log(ev);
   return ev.clientX;
 };
@@ -317,6 +317,18 @@ Markdown PDF 插件不支持以下 Markdown 特性的导出：
 ```
 
 对于 LaTeX 公式的导出支持，需要在 Typora 的设置相中勾选 Markdown 选项中 Syntax Support 的 Inline Math 选项：
+
+如果不想切换工具，寻求在 VSCode 解决 LaTeX 无法在导出的 PDF 中正常显示的问题，可以参考[该 Github Issue](https://github.com/yzane/vscode-markdown-pdf/issues/21)，在 Markdown 文档中添加以下代码片段：
+
+```html
+<script
+  type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });
+</script>
+```
 
 ![](assets/typora-latex-setting.png)
 
