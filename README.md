@@ -1,3 +1,11 @@
+<script
+  type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"
+></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: {inlineMath: [['$', '$']]}, messageStyle: "none" });
+</script>
+
 # 使用 VSCode+Markdown 打造愉悦的科技文章写作体验
 
 ## 0. 前言
@@ -291,9 +299,7 @@ Markdown PDF 插件不支持以下 Markdown 特性的导出：
 - 自定义图片尺寸
 - LaTeX 公式
 
-如果 Markdown 没有使用以上特性，Markdown PDF 插件提供了良好的导出体验；如果 Markdown 文档中使用了以上特性，可以使用绕行方案——安装[Typora](https://typora.io/)来解决。
-
-对于图片尺寸的支持，需要根据[Typora 官方文档](https://support.typora.io/Resize-Image/)的指引，采用`<img>` tag 实现，Typora 支持以下图片大小的设置方式：
+对于图片尺寸的支持，可以采用 HTML 的`<img>` tag 替代 Markdown 的图片语法：
 
 ```html
 <img
@@ -316,9 +322,13 @@ Markdown PDF 插件不支持以下 Markdown 特性的导出：
 />
 ```
 
-对于 LaTeX 公式的导出支持，需要在 Typora 的设置相中勾选 Markdown 选项中 Syntax Support 的 Inline Math 选项：
+对于 LaTeX 公式的导出支持，可以通过安装[Typora](https://typora.io/)来解决。在 Typora 的设置相中勾选 Markdown 选项中 Syntax Support 的 Inline Math 选项：
 
 如果不想切换工具，寻求在 VSCode 解决 LaTeX 无法在导出的 PDF 中正常显示的问题，可以参考[该 Github Issue](https://github.com/yzane/vscode-markdown-pdf/issues/21)，在 Markdown 文档中添加以下代码片段：
+·
+![](assets/typora-latex-setting.png)
+
+设置完成后，通过 Typora 的`File->Export`菜单项导出目标格式的文档。
 
 ```html
 <script
@@ -330,11 +340,7 @@ Markdown PDF 插件不支持以下 Markdown 特性的导出：
 </script>
 ```
 
-![](assets/typora-latex-setting.png)
-
-设置完成后，通过 Typora 的`File->Export`菜单项导出目标格式的文档。
-
-## 6. Markdown 与 Terminals 的集成
+## 6. Markdown 与 Terminal 的集成
 
 如果 Markdown 文件中有命令行片段：
 
